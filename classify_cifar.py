@@ -5,9 +5,11 @@ https://pytorch.org/tutorials/beginner/blitz/cifar10_tutorial.html#sphx-glr-begi
 
 import torch
 import torchvision
+import torch.nn as nn
 import torch.optim as optim
+import torch.nn.functional as F
 import torchvision.transforms as transforms
-from architecture import Net
+from architecture import Classification_Net
 
 transform = transforms.Compose(
     [transforms.ToTensor(),
@@ -26,10 +28,10 @@ test_loader = torch.utils.data.DataLoader(test_set, batch_size=4,
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')                            
 
-net = Net()
+net = Classification_Net()
 
 criterion = nn.CrossEntropyLoss()
-optimizer = optim.SSD(net.parameters(), lr=0.001, momentum=0.9)
+optimizer = optim.SGD(net.parameters(), lr=0.001, momentum=0.9)
 
 for epoch in range(2):
     running_loss = 0.0
